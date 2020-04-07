@@ -7,7 +7,11 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "core-js": "^3.6.4",
+    "node-sass": "^4.13.1",
+    "resizable-columns": "^1.0.4",
+    "sass-loader": "^8.0.2",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
     "vuex": "^3.1.3"
