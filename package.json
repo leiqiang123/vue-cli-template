@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-decoupled-document": "^19.0.0",
     "babel-runtime": "^6.26.0",
     "core-js": "^3.6.4",
     "node-sass": "^4.13.1",
