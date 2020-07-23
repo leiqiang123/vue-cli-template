@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">table-resize</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> ｜
+      <router-link to="/elementui">Elementui</router-link>
     </div>
     <router-view/>
   </div>
