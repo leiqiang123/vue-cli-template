@@ -1,13 +1,13 @@
 <template>
   <div class="about">
-    <!-- <h1>This is an about page</h1> -->
-    <!-- 工具栏容器 -->
-    <!-- <div id="toolbar-container"></div> -->
-    <!-- 编辑器容器 -->
-    <!-- <div id="editor">
+     <h1>This is an about page</h1>
+<!--     工具栏容器 -->
+     <div id="toolbar-container"></div>
+<!--     编辑器容器 -->
+    <div id="editor">
       <p>This is the initial editor content.</p>
     </div>
-    <div class="cs-empty"></div> -->
+    <div class="cs-empty"></div>
     <div class="container">
       <div class="drag-div" @mousedown="move">
         {{positionX}}
@@ -55,7 +55,7 @@
         let disY = e.clientY - odiv.offsetTop
         document.onmousemove = (e)=>{       //鼠标按下并移动的事件
           //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
-          let left = e.clientX - disX   
+          let left = e.clientX - disX
           let top = e.clientY - disY
           //绑定元素位置到positionX和positionY上面
           //移动当前元素
