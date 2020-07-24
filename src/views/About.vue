@@ -1,13 +1,6 @@
 <template>
   <div class="about">
      <h1>This is an about page</h1>
-<!--     工具栏容器 -->
-     <div id="toolbar-container"></div>
-<!--     编辑器容器 -->
-    <div id="editor">
-      <p>This is the initial editor content.</p>
-    </div>
-    <div class="cs-empty"></div>
     <div class="container">
       <div class="drag-div" @mousedown="move">
         {{positionX}}
@@ -17,8 +10,6 @@
   </div>
 </template>
 <script>
-  import CKEditor from '@ckeditor/ckeditor5-build-decoupled-document'
-  import '@ckeditor/ckeditor5-build-decoupled-document/build/translations/zh-cn'
   export default {
     name: 'adout',
     data() {
@@ -28,26 +19,11 @@
       }
     },
     created() {
+      console.log(process.env.BASE_URL)
     },
     mounted() {
-      // this.initCKEditor()
     },
     methods: {
-      initCKEditor() {
-        CKEditor.create(document.querySelector('#editor'), {
-          language: 'zh-cn',
-          ckfinder: {
-            uploadUrl: '/admin/Upload/uploadUrl'
-            //后端处理上传逻辑返回json数据,包括uploaded(选项true/false)和url两个字段
-          }
-        }).then(editor => {
-          const toolbarContainer = document.querySelector('#toolbar-container')
-          toolbarContainer.appendChild(editor.ui.view.toolbar.element)
-          this.editor = editor //将编辑器保存起来，用来随时获取编辑器中的内容等，执行一些操作
-        }).catch(error => {
-          console.error(error)
-        })
-      },
       move(e){
         let odiv = e.target  //获取目标元素
         //算出鼠标相对元素的位置
@@ -89,11 +65,6 @@
   }
 </script>
 <style lang="scss" scoped>
-  .cs-empty:empty{
-    width: 120px;
-    padding: 20px;
-    border: 10px dashed;
-  }
   .container{
     position: relative;
     width: 200px;
