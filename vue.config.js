@@ -2,6 +2,8 @@
 const path = require('path')
 const CompressionPlugin = require("compression-webpack-plugin")
 
+const productionGzipExtensions = ['js', 'css', 'jpg', 'jpeg', 'png']
+
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -40,15 +42,18 @@ module.exports = {
     // },
   },
   configureWebpack: config => {
-    if (process.env.NODE_ENV === 'production') {
-      config.plugins = [
-        new CompressionPlugin({
-          test: /\.js$|\.html$|\.css$|\.jpg$|\.jpeg$|\.png/, // 需要压缩的文件类型
-          threshold: 10240, // 归档需要进行压缩的文件大小最小值，我这个是10K以上的进行压缩
-          deleteOriginalAssets: false // 是否删除原文件
-        })
-      ]
-    }
+    // if(process.env.NODE_ENV !== 'development'){
+    //   config.plugins = [
+    //     new CompressionPlugin({
+    //       filename: '[path].gz[query]',
+    //       algorithm: 'gzip',
+    //       test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),//匹配文件名
+    //       threshold: 10240,//对10K以上的数据进行压缩
+    //       minRatio: 0.8,
+    //       deleteOriginalAssets:false,//是否删除源文件
+    //     })
+    //   ]
+    // }
     config.name = name
     config.resolve.alias = {
       '@': resolve('src')
@@ -78,12 +83,12 @@ module.exports = {
 
     config
     // https://webpack.js.org/configuration/devtool/#development
-      .when(process.env.NODE_ENV === 'development',
+      .when(process.env.NODE_ENV === '.env.development',
         config => config.devtool('cheap-source-map')
       )
 
     config
-      .when(process.env.NODE_ENV !== 'development',
+      .when(process.env.NODE_ENV !== '.env.development',
         config => {
           config
             .plugin('ScriptExtHtmlWebpackPlugin')
