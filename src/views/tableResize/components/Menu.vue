@@ -18,6 +18,7 @@
 </template>
 <script>
 export default {
+  name:'Menu',
   props: {
     operations: {
       type: Array,

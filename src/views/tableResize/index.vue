@@ -40,7 +40,6 @@
 </template>
 
 <script>
-  import Menu from './components/Menu'
   import createColResizable from 'resizable-columns'
   export default {
     name: 'tableResize',
@@ -81,7 +80,7 @@
       }
     },
     components: {
-      Menu
+      Menu: () => import('./components/Menu'),
     },
     created() {
     },

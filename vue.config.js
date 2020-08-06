@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const CompressionPlugin = require("compression-webpack-plugin")
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -38,12 +39,19 @@ module.exports = {
     //   },
     // },
   },
-  configureWebpack: {
-    name: name,
-    resolve: {
-      alias: {
-        '@': resolve('src')
-      }
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins = [
+        new CompressionPlugin({
+          test: /\.js$|\.html$|\.css$|\.jpg$|\.jpeg$|\.png/, // 需要压缩的文件类型
+          threshold: 10240, // 归档需要进行压缩的文件大小最小值，我这个是10K以上的进行压缩
+          deleteOriginalAssets: false // 是否删除原文件
+        })
+      ]
+    }
+    config.name = name
+    config.resolve.alias = {
+      '@': resolve('src')
     }
   },
   css: {
