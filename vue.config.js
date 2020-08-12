@@ -1,8 +1,5 @@
 'use strict'
 const path = require('path')
-const CompressionPlugin = require("compression-webpack-plugin")
-
-const productionGzipExtensions = ['js', 'css', 'jpg', 'jpeg', 'png']
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -42,18 +39,6 @@ module.exports = {
     // },
   },
   configureWebpack: config => {
-    // if(process.env.NODE_ENV !== 'development'){
-    //   config.plugins = [
-    //     new CompressionPlugin({
-    //       filename: '[path].gz[query]',
-    //       algorithm: 'gzip',
-    //       test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),//匹配文件名
-    //       threshold: 10240,//对10K以上的数据进行压缩
-    //       minRatio: 0.8,
-    //       deleteOriginalAssets:false,//是否删除源文件
-    //     })
-    //   ]
-    // }
     config.name = name
     config.resolve.alias = {
       '@': resolve('src')
@@ -80,13 +65,6 @@ module.exports = {
         return options
       })
       .end()
-
-    config
-    // https://webpack.js.org/configuration/devtool/#development
-      .when(process.env.NODE_ENV === '.env.development',
-        config => config.devtool('cheap-source-map')
-      )
-
     config
       .when(process.env.NODE_ENV !== '.env.development',
         config => {
@@ -108,11 +86,6 @@ module.exports = {
                   priority: 10,
                   chunks: 'initial' // only package third parties that are initially dependent
                 },
-                elementUI: {
-                  name: 'chunk-elementUI', // split elementUI into a single package
-                  priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-                  test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
-                }
               }
             })
           config.optimization.runtimeChunk('single')
